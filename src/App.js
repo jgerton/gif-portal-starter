@@ -5,6 +5,12 @@ import "./App.css";
 // Constants
 const TWITTER_HANDLE = "jgerton";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
+const TEST_GIFS = [
+"https://media.giphy.com/media/Ld77zD3fF3Run8olIt/giphy.gif",
+"https://media.giphy.com/media/oNUT8DaPMZ2Y6OsaJ5/giphy.gif",
+"https://media.giphy.com/media/znXPZJUqZLeda/giphy.gif",
+"https://media.giphy.com/media/xunHSirDBwoCY/giphy.gif"
+];
 
 const App = () => {
   // State
@@ -70,6 +76,18 @@ const App = () => {
     </button>
   );
 
+  const renderConnectedContainer = () => (
+    <div className="connected-container">
+      <div className="gif-grid">
+        {TEST_GIFS.map(gif => (
+          <div className="gif-item" key={gif}>
+            <img src={gif} alt={gif} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   /*
    * When our component first mounts, let's check to see if we have a connected
    * Phantom Wallet
@@ -87,12 +105,15 @@ const App = () => {
       {/* This was solely added for some styling fanciness */}
       <div className={walletAddress ? "authed-container" : "container"}>
         <div className="header-container">
-          <p className="header">🖼 GIF Portal</p>
+          <p className="header">🖼 Movie GIF Portal</p>
           <p className="sub-text">
-            View your GIF collection in the metaverse ✨
+            View your Movie GIF collection in the metaverse ✨
           </p>
           {/* Render your connect to wallet button right here */}
           {!walletAddress && renderNotConnectedContainer()}
+
+          {/* Wallet connected, render GIF contents right here */}
+          {walletAddress && renderConnectedContainer()}
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
