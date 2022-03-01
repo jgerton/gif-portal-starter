@@ -12,7 +12,7 @@ const { SystemProgram, Keypair } = web3;
 
 const arr = Object.values(kp._keypair.secretKey)
 const secret = new Uint8Array(arr)
-const baseAccount = web3.Keypair.fromSecretKey(secret)
+const baseAccount = Keypair.fromSecretKey(secret)
 
 // Get our program's id from the IDL file.
 const programID = new PublicKey(idl.metadata.address);
